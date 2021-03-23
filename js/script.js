@@ -129,9 +129,15 @@ const icons = [
 const iconsContainer = $('.icons');
 const colors = ['pink', 'lightblue', 'brown'];
 
-function generateIcons (array, html, color) {
+function generateIcons (array, html, keyArray, colorArray) {
   array.forEach( (icon) => {
+    let color;
     const {name, family, prefix, category} = icon;
+    keyArray.forEach((element, i) => {
+      if ( element == category ) {
+        color = colorArray[i];
+      }
+    });
     html.append(`
       <div>
       <i style="color:${color}" class="${family} ${prefix}${name}"></i>
@@ -154,9 +160,7 @@ icons.forEach( (icon) => {
   }
 });
 
-console.log(iconCategories);
-
-generateIcons(icons, iconsContainer, iconColor);
+generateIcons(icons, iconsContainer, iconCategories, colors);
 
 // Milestone 3
 // Creiamo una select con le categorie di icone e usiamola per filtrare le icone
