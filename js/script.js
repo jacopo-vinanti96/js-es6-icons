@@ -1,12 +1,4 @@
-// Milestone 1
-// Partendo dalla seguente struttura dati , mostriamo in pagina tutte le icone disponibili come da layout.
-//
-// Milestone 2
-// Coloriamo le icone per tipo
-//
-// Milestone 3
-// Creiamo una select con i tipi di icone e usiamola per filtrare le icone
-
+//Array di oggetti
 const icons = [
   {
     name: 'apple-alt',
@@ -165,7 +157,7 @@ generateIcons(icons, iconsContainer, iconCategories, colors);
 // Creiamo una select con le categorie di icone e usiamola per filtrare le icone
 
 // Ciclo che stampa le categorie nella select html
-select = $('#type');
+const select = $('#type');
 
 iconCategories.forEach( (item) => {
   select.append(`
@@ -173,9 +165,10 @@ iconCategories.forEach( (item) => {
     `)
 });
 
+// select onchange si esegue la funzione per generare nuovamente le icone corrispondenti alla categoria scelta
 select.change( function () {
   iconsContainer.html("");
-  let iconsFiltered = icons.filter( (item) => {
+  const iconsFiltered = icons.filter( (item) => {
     return $(this).val() == item.category;
   });
   if ( iconsFiltered.length == 0 ) {
