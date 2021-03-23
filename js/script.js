@@ -118,12 +118,6 @@ const icons = [
   },
 ];
 
-// Icon box
-// <div>
-//   <i class="fas fa-cat"></i>
-//   <div class="title">CAT</div>
-// </div>
-
 // Milestone 1
 // Partendo dalla seguente struttura dati , mostriamo in pagina tutte le icone disponibili come da layout.
 const iconsContainer = $('.icons');
@@ -153,16 +147,14 @@ function generateIcons (array, html, keyArray, colorArray) {
   });
 }
 
-
 // Milestone 2
 // Coloriamo le icone per categoria
+
 // Dichiarazione array costante
 const iconCategories = [];
 //Si aggiunge la chiave solo se è unica
 icons.forEach( (icon) => {
-  if ( iconCategories.length == 0 ) {
-    iconCategories.push(icon.category);
-  } else if ( iconCategories.includes(icon.category) == false ) {
+if ( iconCategories.includes(icon.category) == false ) {
     iconCategories.push(icon.category);
   }
 });
@@ -171,3 +163,24 @@ generateIcons(icons, iconsContainer, iconCategories, colors);
 
 // Milestone 3
 // Creiamo una select con le categorie di icone e usiamola per filtrare le icone
+
+// Ciclo che stampa le categorie nella select html
+select = $('#type');
+
+iconCategories.forEach( (item) => {
+  select.append(`
+    <option value="${item}">${item}</option>
+    `)
+});
+
+select.change( function () {
+  iconsContainer.html("");
+  let iconsFiltered = icons.filter( (item) => {
+    return $(this).val() == item.category;
+  });
+  if ( iconsFiltered.length == 0 ) {
+    generateIcons(icons, iconsContainer, iconCategories, colors);
+  } else {
+    generateIcons(iconsFiltered, iconsContainer, iconCategories, colors);
+  }
+});
