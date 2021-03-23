@@ -112,8 +112,12 @@ const icons = [
 
 // Milestone 1
 // Partendo dalla seguente struttura dati , mostriamo in pagina tutte le icone disponibili come da layout.
-const iconsContainer = $('.icons');
-const colors = ['pink', 'lightblue', 'brown'];
+// Milestone 2
+// Coloriamo le icone per categoria
+
+const colors = ['pink', 'lightblue', 'brown'],
+      iconsContainer = $('.icons'),
+      iconCategories = [];
 
 // Funzione per colorare e stampare i box
 function generateIcons (array, html, keyArray, colorArray) {
@@ -139,11 +143,6 @@ function generateIcons (array, html, keyArray, colorArray) {
   });
 }
 
-// Milestone 2
-// Coloriamo le icone per categoria
-
-// Dichiarazione array costante
-const iconCategories = [];
 //Si aggiunge la chiave solo se è unica
 icons.forEach( (icon) => {
 if ( iconCategories.includes(icon.category) == false ) {
@@ -153,17 +152,24 @@ if ( iconCategories.includes(icon.category) == false ) {
 // Si esegue la funzione di stampa
 generateIcons(icons, iconsContainer, iconCategories, colors);
 
+
+
+
 // Milestone 3
 // Creiamo una select con le categorie di icone e usiamola per filtrare le icone
 
-// Ciclo che stampa le categorie nella select html
 const select = $('#type');
 
-iconCategories.forEach( (item) => {
-  select.append(`
-    <option value="${item}">${item}</option>
-    `)
-});
+// Funzione che stampa un array nella select html
+function printOptions (array, select) {
+  iconCategories.forEach( (item) => {
+    select.append(`
+      <option value="${item}">${item}</option>
+      `)
+  });
+}
+
+printOptions(iconCategories, select);
 
 // select onchange si esegue la funzione per generare nuovamente le icone corrispondenti alla categoria scelta
 select.change( function () {
