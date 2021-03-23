@@ -129,29 +129,36 @@ const icons = [
 const iconsContainer = $('.icons');
 const colors = ['pink', 'lightblue', 'brown'];
 
+// Funzione per colorare e stampare i box
 function generateIcons (array, html, keyArray, colorArray) {
+// Ciclo che seleziona gli oggetti dell' array
   array.forEach( (icon) => {
+// Dichiarazione locale var colore vuota e destrutturazione degli oggetti
     let color;
     const {name, family, prefix, category} = icon;
+//Si controllano i valori della chiave, e in base alla posizione si associa il colore corrispondente
     keyArray.forEach((element, i) => {
       if ( element == category ) {
         color = colorArray[i];
       }
     });
+//Si stampa il box
     html.append(`
       <div>
       <i style="color:${color}" class="${family} ${prefix}${name}"></i>
       <div class="title">${name}</div>
       </div>
     `);
+
   });
 }
 
 
 // Milestone 2
 // Coloriamo le icone per categoria
+// Dichiarazione array costante
 const iconCategories = [];
-
+//Si aggiunge la chiave solo se è unica
 icons.forEach( (icon) => {
   if ( iconCategories.length == 0 ) {
     iconCategories.push(icon.category);
@@ -159,7 +166,7 @@ icons.forEach( (icon) => {
     iconCategories.push(icon.category);
   }
 });
-
+// Si esegue la funzione di stampa
 generateIcons(icons, iconsContainer, iconCategories, colors);
 
 // Milestone 3
